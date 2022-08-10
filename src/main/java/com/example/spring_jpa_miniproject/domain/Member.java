@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -13,6 +14,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     private String name;
@@ -21,10 +23,10 @@ public class Member {
     private Address address;
 
     @OneToMany(mappedBy = "member")
-    private List<Order> orderList = new ArrayList<>();
+    private List<Orders> orderList = new ArrayList<>();
 
     @Builder
-    public Member(String name, Address address, List<Order> orderList) {
+    public Member(String name, Address address, List<Orders> orderList) {
         this.name = name;
         this.address = address;
         this.orderList = orderList;
