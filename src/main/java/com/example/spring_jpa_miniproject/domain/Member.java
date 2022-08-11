@@ -1,6 +1,7 @@
 package com.example.spring_jpa_miniproject.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Member {
 
@@ -30,5 +32,13 @@ public class Member {
         this.name = name;
         this.address = address;
         this.orderList = orderList;
+    }
+
+    ///연관관계 편의 메서드
+    void addOrder(Orders orders) {
+        this.getOrderList().add(orders);
+        if (orders.getMember() != this) {
+            orders.setMember(this);
+        }
     }
 }
