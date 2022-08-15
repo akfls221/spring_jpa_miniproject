@@ -47,6 +47,6 @@ public class MemberRepository {
 
     public Optional<List<Member>> findAll() {
         return Optional.ofNullable(em.createQuery("select m from Member m", Member.class)
-                .getResultList();
+                .getResultList());
     }
 }
