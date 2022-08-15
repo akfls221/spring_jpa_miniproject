@@ -15,7 +15,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public Long join(MemberDto request) {
-        if (memberRepository.findByName(request.getName())) {
+        if (!memberRepository.findByName(request.getName()).isEmpty()) {
             throw new IllegalArgumentException("이미 가입되어 있는 회원입니다.");
         }
         Member member = Member.builder()
