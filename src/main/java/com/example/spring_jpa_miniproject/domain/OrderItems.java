@@ -1,5 +1,6 @@
 package com.example.spring_jpa_miniproject.domain;
 
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -16,6 +17,10 @@ public class OrderItems {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Orders order;
 
     private int orderPrice;
 
