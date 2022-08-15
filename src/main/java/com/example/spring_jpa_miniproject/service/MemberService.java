@@ -7,6 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,5 +29,12 @@ public class MemberService {
         memberRepository.save(member);
 
         return member.getId();
+    }
+
+    public List<MemberDto> allMember() {
+        List<Member> members = memberRepository.findAll().orElseThrow(() -> new IllegalArgumentException("가입되어 있는 회원이 없습니다."));
+        return members.stream()
+                .map(member -> new MemberDto(member.getName(), member.getAddress()))
+                .collect(Collectors.toList());
     }
 }
