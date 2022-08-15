@@ -1,17 +1,18 @@
 package com.example.spring_jpa_miniproject.repository;
 
 import com.example.spring_jpa_miniproject.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     /**
      * 회원 저장
@@ -38,11 +39,9 @@ public class MemberRepository {
      * @param name
      * @return List<Member>
      */
-    public Boolean findByName(String name) {
-        Boolean result = em.createQuery("select m from Member m where m.name =: name", Boolean.class)
-                .setParameter("name", name)
-                .getSingleResult();
-
-        return result;
+    public List<Member> findByName(String name) {
+        return em.createQuery("select m from Member m where m.name = :userName", Member.class)
+                .setParameter("userName", name)
+                .getResultList();
     }
 }
