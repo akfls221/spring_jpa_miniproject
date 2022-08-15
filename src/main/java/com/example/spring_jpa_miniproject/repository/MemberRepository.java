@@ -44,4 +44,9 @@ public class MemberRepository {
                 .setParameter("userName", name)
                 .getResultList();
     }
+
+    public Optional<List<Member>> findAll() {
+        return Optional.ofNullable(em.createQuery("select m from Member m", Member.class)
+                .getResultList();
+    }
 }
