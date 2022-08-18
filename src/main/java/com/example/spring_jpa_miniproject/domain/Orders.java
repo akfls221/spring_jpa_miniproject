@@ -79,6 +79,15 @@ public class Orders {
         }
     }
 
+    //전체 주문 가격조회
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (OrderItems orderItem : orderItemsList) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
     @Builder
     public Orders(Member member, Delivery delivery, OrderStatus orderStatus, LocalDateTime orderDate) {
         this.member = member;
