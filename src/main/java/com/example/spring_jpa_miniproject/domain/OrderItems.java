@@ -29,6 +29,19 @@ public class OrderItems {
 
     private int count;
 
+    /**
+     * 주문 아이템 생성 메서드
+     */
+    public static OrderItems createOrderItem(Item item, int orderPrice, int count) throws NotEnoughStockException {
+        OrderItems orderItem = OrderItems.builder()
+                .item(item)
+                .orderPrice(orderPrice)
+                .count(count)
+                .build();
+
+        item.removeStock(count);
+        return orderItem;
+    }
 
     public OrderItems() {
 
