@@ -1,12 +1,15 @@
 package com.example.spring_jpa_miniproject.domain;
 
+import com.example.spring_jpa_miniproject.exception.NotEnoughStockException;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
+@Getter
+@Builder
 public class OrderItems {
 
     @Id
@@ -25,4 +28,13 @@ public class OrderItems {
     private int orderPrice;
 
     private int count;
+
+
+    public OrderItems() {
+
+    }
+
+    public void cancel() {
+       getItem().addStock(count);
+    }
 }
